@@ -9,6 +9,9 @@ M.servers = {
     -- python
     'ruff_lsp',
     'pyright',
+    -- go
+    'gopls',
+    'golangci_lint_ls',
     -- docker
     'dockerls',
 }
