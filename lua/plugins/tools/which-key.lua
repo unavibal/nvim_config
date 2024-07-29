@@ -1,18 +1,19 @@
 --
 local M = {
     "folke/which-key.nvim",
-    event = "VeryLazy"
+    dependencies = {'echasnovski/mini.icons'},
+    event = "VeryLazy",
 }
 
 M.opts = {
     defaults = {
-        ["<leader>f"] = {name = "+file/find"},
-        ["<leader>g"] = {name = "+git"},
-        ["<leader>h"] = { name = "+harpoon" },
-        ["<leader>b"] = { name = "+buffers" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>k"] = { name = "+code/actions" },
-        ["<leader>d"] = { name = "+debug" },
+    { "<leader>b", group = "buffers" },
+    { "<leader>d", group = "debug" },
+    { "<leader>f", group = "file/find" },
+    { "<leader>g", group = "git" },
+    { "<leader>h", group = "harpoon" },
+    { "<leader>k", group = "code/actions" },
+    { "<leader>q", group = "quit/session" },
     }
 }
 
@@ -24,7 +25,7 @@ end
 M.config = function(_, opts)
     local wk = require("which-key")
     wk.setup(opts)
-    wk.register(opts.defaults)
+    wk.add(opts.defaults)
 end
 
 return M

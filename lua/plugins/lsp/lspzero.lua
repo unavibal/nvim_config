@@ -28,18 +28,16 @@ M.config = function(_, opts)
 
         -- keymaps
         local wk = require("which-key")
-        wk.register({
-            ["<leader>k"]  = { name = "+code/actions" },
-            ["<leader>ka"] = { function() vim.lsp.buf.code_action() end, "Show code actions"},
-            ["<leader>kr"] = { function() vim.lsp.buf.references() end, "List references"},
-            ["<leader>kn"] = { function() vim.lsp.buf.rename() end, "Rename symbol"},
-            ["gd"]= { function() vim.lsp.buf.definition() end, "Go to definition"},
-            ["gD"]= { function() vim.lsp.buf.declaration() end, "Go to declaration"},
-            ["K"] = { function() vim.lsp.buf.hover() end, "Show hover information"},
+        wk.add({
+            {"<leader>k", group = "code/actions" },
+            {"<leader>ka", function() vim.lsp.buf.code_action() end, desc = "Show code actions"},
+            {"<leader>kr", function() vim.lsp.buf.references() end, desc = "List references"},
+            {"<leader>kn", function() vim.lsp.buf.rename() end, desc = "Rename symbol"},
+            {"gd", function() vim.lsp.buf.definition() end, desc = "Go to definition"},
+            {"gD", function() vim.lsp.buf.declaration() end, desc = "Go to declaration"},
+            {"K", function() vim.lsp.buf.hover() end, desc = "Show hover information"},
+            {"<C-s>", function() vim.lsp.buf.signature_help() end, desc = "Show signature help", mode = "i"},
         })
-        wk.register({
-            ["<C-s>"] = {function() vim.lsp.buf.signature_help() end, "Show signature help"},
-        }, {mode = "i"})
     end)
 
     -- formatting

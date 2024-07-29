@@ -35,8 +35,7 @@ M.opts = {
             return {
                 CursorLineNr = { fg = colors.rosewater },
                 NormalFloat = { bg = colors.none },
-                FloatBorder = { bg = colors.none },
-                WhichKeyFloat = { bg = colors.mantle },
+                WhichKeyNormal = { bg = colors.mantle },
             }
         end,
     },
