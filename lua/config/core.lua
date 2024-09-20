@@ -35,6 +35,12 @@ opt.tabstop = 4                 -- 1 tab == 4 spaces
 opt.smartindent = true          -- Autoindent new lines
 
 --------------------------------------------------------------------------------
+-- split windows
+--------------------------------------------------------------------------------
+opt.splitright = true           -- split vertical window to the right
+opt.splitbelow = true           -- split horizontal window to the bottom
+
+--------------------------------------------------------------------------------
 -- Memory, CPU
 --------------------------------------------------------------------------------
 opt.hidden = true               -- Enable background buffers

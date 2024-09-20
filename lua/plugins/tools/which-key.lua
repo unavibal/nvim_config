@@ -14,6 +14,8 @@ M.opts = {
     { "<leader>h", group = "harpoon" },
     { "<leader>k", group = "code/actions" },
     { "<leader>q", group = "quit/session" },
+    { "<leader>t", group = "tabs" },
+    { "<leader>s", group = "splits" },
     }
 }
 
