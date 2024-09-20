@@ -1,21 +1,35 @@
 M = {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    dependencies = {"folke/which-key.nvim", {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp"
-    }},
-    lazy = true,
+    branch = 'v4.x',
+    dependencies = {
+        'neovim/nvim-lspconfig',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/nvim-cmp',
+        "folke/which-key.nvim",
+    },
+    -- lazy = true,
 }
 
-M.opts = {}
+M.opts = {
+    keymaps = {
+        {"<leader>k", group = "code/actions" },
+        {"<leader>ka", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Show code actions"},
+        {"<leader>kr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Show references"},
+        {'<leader>ks', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc="show signature"},
+        {"<leader>kn", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename symbol"},
+        {'<leader>kf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', desc="Format document"},
+        {'K', '<cmd>lua vim.lsp.buf.hover()<cr>', desc="Hover"},
+        {'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', desc="Go to definition"},
+        {'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', desc="Go to declaration"},
+        {'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', desc="Go to implementation"},
+        {"<C-s>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Show signature", mode = "i"},
+    }
+}
 
 M.config = function(_, opts)
     local lsp_zero = require('lsp-zero')
-
-    -- sign column icons
     local icons = require("options.icons")
+
     lsp_zero.set_sign_icons({
         error = icons.diagnostics.Error,
         warn = icons.diagnostics.Warn,
@@ -23,31 +37,21 @@ M.config = function(_, opts)
         hint = icons.diagnostics.Hint,
     })
 
-    lsp_zero.extend_lspconfig()
-    lsp_zero.on_attach(function(client, bufnr)
-
-        -- keymaps
+    local lsp_attach = function(client, bufnr)
         local wk = require("which-key")
-        wk.add({
-            {"<leader>k", group = "code/actions" },
-            {"<leader>ka", function() vim.lsp.buf.code_action() end, desc = "Show code actions"},
-            {"<leader>kr", function() vim.lsp.buf.references() end, desc = "List references"},
-            {"<leader>kn", function() vim.lsp.buf.rename() end, desc = "Rename symbol"},
-            {"gd", function() vim.lsp.buf.definition() end, desc = "Go to definition"},
-            {"gD", function() vim.lsp.buf.declaration() end, desc = "Go to declaration"},
-            {"K", function() vim.lsp.buf.hover() end, desc = "Show hover information"},
-            {"<C-s>", function() vim.lsp.buf.signature_help() end, desc = "Show signature help", mode = "i"},
-        })
-    end)
+        wk.add(opts.keymaps)
+    end
 
-    -- formatting
-    local lspconf = require("options.lsp")
-    lsp_zero.format_on_save({
-        format_opts = {
-            async = false,
-            timeout_ms = 10000,
+    lsp_zero.extend_lspconfig({
+        sign_text = true,
+        lsp_attach = lsp_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        sign_text = {
+            error = icons.diagnostics.Error,
+            warn = icons.diagnostics.Warn,
+            info = icons.diagnostics.Info,
+            hint = icons.diagnostics.Hint,
         },
-        servers = lspconf.format
     })
 end
 
