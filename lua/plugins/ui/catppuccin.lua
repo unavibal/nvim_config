@@ -8,6 +8,7 @@ local M = {
 
 M.opts = {
     show_end_of_buffer = false,
+    term_colors = true,
     styles = {
         comments = { "italic" },
         conditionals = { "italic" },
@@ -34,8 +35,11 @@ M.opts = {
         all = function(colors)
             return {
                 CursorLineNr = { fg = colors.rosewater },
+                CursorLine = { bg = colors.surface0 },
+                ColorColumn = { bg = colors.surface0 },
                 NormalFloat = { bg = colors.none },
                 WhichKeyNormal = { bg = colors.mantle },
+
             }
         end,
     },

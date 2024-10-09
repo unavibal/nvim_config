@@ -16,9 +16,12 @@ M.opts = function()
       },
       sections = {
         lualine_a = { "mode" },
+        lualine_a = { {'mode', fmt =  function(res) return '' .. ' ' .. res:sub(1,1) end} },
         lualine_b = { "branch" },
 
         lualine_c = {
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          'filename',
           {
             "diagnostics",
             symbols = {
@@ -28,8 +31,6 @@ M.opts = function()
               hint = icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          'filename'
         },
         lualine_x = {
           {
@@ -65,9 +66,7 @@ M.opts = function()
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
+            "encoding"
         },
       },
       extensions = { "lazy" },
