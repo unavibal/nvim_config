@@ -41,14 +41,9 @@ M.keys = {
         desc = "file explorer"
     },
     {
-        "<leader>e",
+        "<leader>fe",
         "<cmd>Oil --float<cr>",
         desc = "file explorer"
-    },
-    {
-        "<leader>E",
-        "<cmd>Oil --float .<cr>",
-        desc = "file explorer (root dir)"
     },
 }
 

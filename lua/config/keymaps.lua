@@ -1,6 +1,8 @@
 --------------------------------------------------------------------------------
 -- Normal mode
 --------------------------------------------------------------------------------
+vim.keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", "<leader>ns", ":source ~/.config/nvim/init.lua<CR>", { desc = "source nvim config" })
 
 -- window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })

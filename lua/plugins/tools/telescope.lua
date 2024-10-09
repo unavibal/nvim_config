@@ -11,6 +11,26 @@ M.opts = function()
 
     return {
         defaults = {
+            vimgrep_arguments = {
+                "rg",
+                "--follow",        -- Follow symbolic links
+                "--hidden",        -- Search for hidden files
+                "--no-heading",    -- Don't group matches by each file
+                "--with-filename", -- Print the file path with the matched lines
+                "--line-number",   -- Show line numbers
+                "--column",        -- Show column numbers
+                "--smart-case",    -- Smart case search
+                "--no-ignore-vcs", -- search in folders ignored by gitignore
+
+                -- Exclude some patterns from search
+                "--glob=!**/.git/*",
+                "--glob=!**/.idea/*",
+                "--glob=!**/.vscode/*",
+                "--glob=!**/build/*",
+                "--glob=!**/dist/*",
+                "--glob=!**/yarn.lock",
+                "--glob=!**/package-lock.json",
+            },
             mappings = {
                 i = {
                     ["<C-j>"] = actions.move_selection_next,
@@ -30,29 +50,19 @@ M.cmd = "Telescope"
 M.keys = { --   find
 {
     "<leader>ff",
-    "<cmd>Telescope find_files<cr>",
-    desc = "find files (root dir)"
+    "<cmd>Telescope find_files no_ignore=true<cr>",
+    desc = "find files"
+},
+{
+    "<leader>fh",
+    "<cmd>Telescope find_files no_ignore=true hidden=true<cr>",
+    desc = "find files (hidden)"
 },
 {
     "<leader>fg",
     "<cmd>Telescope live_grep<cr>",
-    desc = "live grep (root dir)"
+    desc = "live grep"
 },
-{
-    "<leader>fF",
-    function()
-                require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })
-    end,
-    desc = "find files (crnt dir)"
-},
-{
-    "<leader>fG",
-    function()
-                require('telescope.builtin').live_grep({ cwd = vim.fn.expand('%:p:h') })
-    end,
-    desc = "live grep (crnt dir)"
-},
-
 {
     "<leader>fr",
     "<cmd>Telescope oldfiles<cr>",

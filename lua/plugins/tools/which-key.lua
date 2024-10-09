@@ -13,7 +13,8 @@ M.opts = {
     { "<leader>g", group = "git" },
     { "<leader>h", group = "harpoon" },
     { "<leader>k", group = "code/actions" },
-    { "<leader>q", group = "quit/session" },
+    { "<leader>p", group = "session" },
+    { "<leader>n", group = "misc" },
     { "<leader>t", group = "tabs" },
     { "<leader>s", group = "splits" },
     }
