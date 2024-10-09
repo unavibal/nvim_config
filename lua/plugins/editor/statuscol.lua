@@ -16,7 +16,7 @@ M.opts = function()
                 click = "v:lua.ScSa"
             },
             {
-                sign = { namespace = { "diagnostic/signs" }, maxwidth = 1, colwidth=1, auto = false },
+                sign = { namespace = { "diagnostic/signs" }, maxwidth = 1, colwidth=2, auto = false },
                 click = "v:lua.ScSa"
             },
             {

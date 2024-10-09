@@ -14,6 +14,9 @@ M.servers = {
     'golangci_lint_ls',
     -- docker
     'dockerls',
+    'docker_compose_language_service',
+    -- markdown
+    'marksman',
 }
 
 M.handlers = {
