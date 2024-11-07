@@ -2,12 +2,12 @@
 M = {}
 
 M.format = {
-    ['ruff_lsp'] = {'python'},
+    ['ruff'] = {'python'},
 }
 
 M.servers = {
     -- python
-    'ruff_lsp',
+    'ruff',
     'pyright',
     -- go
     'gopls',
@@ -20,8 +20,8 @@ M.servers = {
 }
 
 M.handlers = {
-    ruff_lsp = function()
-        require('lspconfig').ruff_lsp.setup({
+    ruff = function()
+        require('lspconfig').ruff.setup({
             on_attach = function(client, bufnr)
                 client.server_capabilities.hoverProvider = false
             end
