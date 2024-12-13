@@ -17,6 +17,8 @@ M.servers = {
     'docker_compose_language_service',
     -- markdown
     'marksman',
+    -- yaml
+    'yamlls'
 }
 
 M.handlers = {
