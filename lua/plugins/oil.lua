@@ -25,7 +25,7 @@ M.opts = {
     "permissions",
   },
   float = {
-    padding = 5,
+    padding = 8,
   },
 }
 
