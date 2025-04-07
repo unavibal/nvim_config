@@ -6,3 +6,13 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- snacks rename work with oil
+vim.api.nvim_create_autocmd("User", {
+  pattern = "OilActionsPost",
+  callback = function(event)
+    if event.data.actions.type == "move" then
+      Snacks.rename.on_rename_file(event.data.actions.src_url, event.data.actions.dest_url)
+    end
+  end,
+})

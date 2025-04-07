@@ -40,6 +40,11 @@ M.keys = {
     desc = "Explorer Oil (root dir)",
   },
   {
+    "-",
+    "<cmd>Oil --float<cr>",
+    desc = "Explorer Oil (cwd)",
+  },
+  {
     "<leader>fE",
     "<cmd>Oil --float<cr>",
     desc = "Explorer Oil (cwd)",
