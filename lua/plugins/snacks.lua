@@ -8,7 +8,7 @@ M.opts = function(_, opts)
     files = {
       hidden = true,
       ignored = true,
-      exclude = { "node_modules", ".git", ".venv" },
+      exclude = { "node_modules", ".git", ".venv", ".ruff_cache" },
     },
   }
 end
