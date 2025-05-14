@@ -13,3 +13,4 @@ opt.clipboard = "" -- unnamed clipboard
 -- ui
 --------------------------------------------------------------------------------
 opt.relativenumber = true -- relative linenumbers
+opt.guicursor = "n-v-c-sm-i-ci-ve:block,r-cr-o:hor20" -- set cursor to block
