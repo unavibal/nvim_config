@@ -4,6 +4,7 @@ local M = {
 }
 
 M.opts = function(_, opts)
+  opts.explorer = { enabled = false }
   opts.picker.sources = {
     files = {
       hidden = true,
