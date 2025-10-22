@@ -25,7 +25,9 @@ M.opts = {
     "permissions",
   },
   float = {
-    padding = 8,
+    border = "rounded",
+    max_width = 0.8,
+    max_height = 0.6,
   },
 }
 
