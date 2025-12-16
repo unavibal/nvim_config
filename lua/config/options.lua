@@ -13,3 +13,5 @@ opt.clipboard = "" -- unnamed clipboard
 -- ui
 --------------------------------------------------------------------------------
 opt.relativenumber = true -- relative linenumbers
+
+vim.go.background = "light"
