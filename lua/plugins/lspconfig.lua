@@ -5,7 +5,8 @@ local M = {
 
 M.opts = function(_, opts)
   opts.diagnostics.virtual_text = false
-  opts.diagnostics.virtual_lines = { current_line = true }
+  opts.diagnostics.virtual_lines = false
+  -- opts.diagnostics.virtual_lines = { current_line = true }
 end
 
 return M
