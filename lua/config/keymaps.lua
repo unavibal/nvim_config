@@ -2,6 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, silent = true })
+vim.keymap.set("i", "º", "<Down>")
+vim.keymap.set("i", "∆", "<Up>")
+vim.keymap.set("i", "ª", "<Left>")
+vim.keymap.set("i", "¬", "<Right>")
 -- Disable Vim's built-in completion for C-n and C-p
 
 local wk = require("which-key")
