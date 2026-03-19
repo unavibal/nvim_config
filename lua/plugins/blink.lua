@@ -6,6 +6,9 @@ local M = {
 M.opts = function(_, opts)
   opts.keymap = {
     preset = "none",
+    ["<A-y>"] = require("minuet").make_blink_map(),
+    ["<¥>"] = require("minuet").make_blink_map(),
+
     ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
     ["<C-e>"] = { "hide", "fallback" },
 
@@ -26,5 +29,23 @@ M.opts = function(_, opts)
     ["<C-j>"] = { "accept", "fallback" },
     ["<C-CR>"] = { "accept", "fallback" },
   }
+  opts.sources = {
+    -- Enable minuet for autocomplete
+    default = { "lsp", "path", "buffer", "snippets", "minuet" },
+    -- For manual completion only, remove 'minuet' from default
+    providers = {
+      minuet = {
+        name = "minuet",
+        module = "minuet.blink",
+        async = true,
+        -- Should match minuet.config.request_timeout * 1000,
+        -- since minuet.config.request_timeout is in seconds
+        timeout_ms = 3000,
+        score_offset = 50, -- Gives minuet higher priority among suggestions
+      },
+    },
+  }
+  -- Recommended to avoid unnecessary request
+  opts.completion = { trigger = { prefetch_on_insert = false } }
 end
 return M

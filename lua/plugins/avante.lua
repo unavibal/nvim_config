@@ -13,9 +13,9 @@ local M = {
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "codestral",
+    provider = "mistral",
     -- Use a separate provider for inline suggestions
-    suggestion_provider = "codestral_fim",
+    auto_suggestions_provider = "codestral_complete",
 
     providers = {
       codestral = {
@@ -29,44 +29,44 @@ local M = {
           max_tokens = 8192,
         },
       },
-      -- FIM provider (for inline suggestions)
-      codestral_fim = {
-        endpoint = "https://codestral.mistral.ai/v1/fim/completions",
+      codestral_complete = {
+        __inherited_from = "openai",
+        endpoint = "https://codestral.mistral.ai/v1",
         api_key_name = "MISTRAL_API_KEY",
         model = "codestral-latest",
-        parse_curl_args = function(opts, code_opts)
-          return {
-            url = opts.endpoint,
-            headers = {
-              ["Content-Type"] = "application/json",
-              ["Authorization"] = "Bearer " .. os.getenv(opts.api_key_name),
-            },
-            body = vim.json.encode({
-              model = opts.model,
-              prompt = code_opts.code_content,
-              suffix = code_opts.suffix or "",
-              max_tokens = 256,
-              temperature = 0,
-            }),
-          }
-        end,
-        parse_response = function(data_stream, _, opts)
-          local ok, json = pcall(vim.json.decode, data_stream)
-          if not ok then
-            return
-          end
-          local text = vim.tbl_get(json, "choices", 1, "message", "content") or vim.tbl_get(json, "choices", 1, "text")
-          if text then
-            opts.on_chunk(text)
-          end
-          if vim.tbl_get(json, "choices", 1, "finish_reason") then
-            opts.on_complete(nil)
-          end
-        end,
+        timeout = 30000,
+        extra_request_body = {
+          temperature = 0.5,
+          max_tokens = 1024,
+        },
+      },
+      devstral_local = {
+        __inherited_from = "openai",
+        endpoint = "http://127.0.0.1:8001/v1",
+        api_key_name = "MISTRAL_LOCAL_KEY",
+        model = "unsloth/Devstral-Small-2-24B-Instruct-2512",
+        timeout = 30000,
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 512,
+        },
+      },
+      mistral = {
+        __inherited_from = "openai",
+        endpoint = "https://api.mistral.ai/v1",
+        api_key_name = "MISTRAL_VIBE_KEY",
+        model = "devstral-2512",
+        timeout = 30000,
+        extra_request_body = {
+          temperature = 0.3,
+          max_tokens = 128000,
+        },
       },
     },
     behaviour = {
       auto_suggestions = false, -- enable inline suggestions
+      auto_approve_tool_permissions = false,
+      confirmation_ui_style = "inline_buttons",
     },
 
     suggestion = {
@@ -84,7 +84,14 @@ local M = {
     input = {
       provider = "snacks", -- or "dressing"
     },
+    windows = {
+      width = 35,
+      input = {
+        height = 12,
+      },
+    },
   },
+
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
@@ -97,23 +104,23 @@ local M = {
     "folke/snacks.nvim", -- for input provider snacks
     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
     "zbirenbaum/copilot.lua", -- for providers='copilot'
-    {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
-      opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          -- required for Windows users
-          use_absolute_path = true,
-        },
-      },
-    },
+    -- {
+    --   -- support for image pasting
+    --   "HakonHarnes/img-clip.nvim",
+    --   event = "VeryLazy",
+    --   opts = {
+    --     -- recommended settings
+    --     default = {
+    --       embed_image_as_base64 = false,
+    --       prompt_for_file_name = false,
+    --       drag_and_drop = {
+    --         insert_mode = true,
+    --       },
+    --       -- required for Windows users
+    --       use_absolute_path = true,
+    --     },
+    --   },
+    -- },
     {
       -- Make sure to set this up properly if you have lazy=true
       "MeanderingProgrammer/render-markdown.nvim",

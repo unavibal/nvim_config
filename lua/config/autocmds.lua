@@ -16,3 +16,13 @@ vim.api.nvim_create_autocmd("User", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.cpp", "*.c", "*.h", "*.hpp", "CMakeLists.txt" },
+  callback = function()
+    if vim.fn.isdirectory("build") == 1 then
+      vim.opt_local.makeprg = "cmake --build build"
+    end
+  end,
+  desc = "Set makeprg for CMake projects",
+})

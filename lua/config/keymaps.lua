@@ -15,6 +15,8 @@ wk.add({
   { "<leader><Tab>ä", "<cmd>tabprevious<cr>", desc = "Previous Tab" },
   { "<leader>cO", "<cmd>OutlineFocus<cr>", desc = "Outline Focus" },
   { "<leader>cc", "<cmd>OutlineFocusCode<cr>", desc = "Code Focus" },
+  { "<leader>cb", ":make<CR>", desc = "Build project" },
+  { "<leader>cC", ":!cmake -DCMAKE_BUILD_TYPE=Debug -B build<CR>", desc = "Configure CMake" },
 })
 
 local dap = require("dap")
