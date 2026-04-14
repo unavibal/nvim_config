@@ -35,7 +35,7 @@ M.opts = function(_, opts)
     settings = {
       python = {
         analysis = {
-          typeCheckingMode = "basic", -- You can change this to "off", "basic", "standard", or "strict"
+          typeCheckingMode = "standard", -- You can change this to "off", "basic", "standard", or "strict"
         },
       },
     },

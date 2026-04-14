@@ -1,7 +1,10 @@
+vim.api.nvim_set_hl(0, "MyAvanteGroup", { bg = "#f2e5bc", fg = "#3c3836" })
+
 local M = {
   "yetone/avante.nvim",
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   -- ⚠️ must add this setting! ! !
+
   build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
   event = "VeryLazy",
@@ -77,12 +80,17 @@ local M = {
     selector = {
       --- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
       --- @type avante.SelectorProvider
-      provider = "fzf",
+      provider = "native",
       -- Options override for custom providers
       provider_opts = {},
     },
     input = {
       provider = "snacks", -- or "dressing"
+      provider_opts = {
+        -- Additional snacks.input options
+        title = "Avante Input",
+        icon = " ",
+      },
     },
     windows = {
       width = 35,
@@ -90,9 +98,15 @@ local M = {
         height = 12,
       },
     },
+    highlights = {
+      diff = {
+        current = MyAvanteGroup,
+      },
+    },
   },
 
   dependencies = {
+    "ellisonleao/gruvbox.nvim",
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
