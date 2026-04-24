@@ -1,5 +1,3 @@
-vim.api.nvim_set_hl(0, "MyAvanteGroup", { bg = "#f2e5bc", fg = "#3c3836" })
-
 local M = {
   "yetone/avante.nvim",
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -100,7 +98,11 @@ local M = {
     },
     highlights = {
       diff = {
-        current = MyAvanteGroup,
+        current = "AvanteDiffCurrent",
+        incoming = "AvanteDiffIncoming",
+      },
+      suggestion = {
+        text = { bg = "#ebdbb2" },
       },
     },
   },
@@ -144,6 +146,16 @@ local M = {
       ft = { "markdown", "Avante" },
     },
   },
+  config = function(_, opts)
+    local avante = require("avante")
+    avante.setup(opts)
+    vim.api.nvim_set_hl(0, "AvanteToBeDeletedWOStrikethrough", { bg = "#f5d0b5" })
+    -- Define custom highlight groups for avante diff
+    vim.api.nvim_set_hl(0, "AvanteConflictCurrent", { bg = "#f5d0b5" })
+    vim.api.nvim_set_hl(0, "AvanteConflictCurrentLabel", { bg = "#f0bc98" })
+    vim.api.nvim_set_hl(0, "AvanteConflictIncoming", { bg = "#d8e8bc" })
+    vim.api.nvim_set_hl(0, "AvanteConflictIncomingLabel", { bg = "#c4dcaa" })
+  end,
 }
 
 return M
